@@ -1,42 +1,38 @@
 import React, { Component } from 'react';
-import './App.css';
-
-import FacebookLogin from 'react-facebook-login';
-
-import GoogleLogin from 'react-google-login';
+import DropdownMenu from './containers/navbar/DropdownMenu';
+import NavBar from './containers/navbar/NavBar';
+import NavItem from './containers/navbar/NavItem';
+import { ReactComponent as BellIcon } from './assets/icons/bell.svg';
+import { ReactComponent as MessengerIcon } from './assets/icons/messenger.svg';
+import { ReactComponent as CaretIcon } from './assets/icons/caret.svg';
+import { ReactComponent as PlusIcon } from './assets/icons/plus.svg';
+import { Route, Switch } from 'react-router-dom';
+import Login from './containers/Login/Login';
 
 class App extends Component {
 
   render() {
-
-    const responseFacebook = (response) => {
-      console.log(response);
-    }
-
-    const responseGoogle = (response) => {
-      console.log(response);
-    }
-
     return (
-      <div className="App">
-        <h1>LOGIN WITH FACEBOOK AND GOOGLE</h1>
+      <div>
+        <NavBar>
+          <NavItem icon={<PlusIcon />} />
+          <NavItem icon={<BellIcon />} />
+          <NavItem icon={<MessengerIcon />} />
 
-      <FacebookLogin
-        appId="275338274143557"
-        fields="name,email,picture"
-        callback={responseFacebook}
-      />
-      <br />
-      <br />
+          <NavItem icon={<CaretIcon />}>
+            <DropdownMenu></DropdownMenu>
+          </NavItem>
+        </NavBar>
 
-
-      <GoogleLogin
-        clientId="879113238185-rhd89fjcgflqef4s62op67hq1e5cpr2e.apps.googleusercontent.com"
-        buttonText="LOGIN WITH GOOGLE"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-      />
-
+        <Switch>
+          <Route
+            exact
+            path="/login"
+            render={() => {
+              return <Login />;
+            }}
+          />
+        </Switch>
       </div>
     );
   }
