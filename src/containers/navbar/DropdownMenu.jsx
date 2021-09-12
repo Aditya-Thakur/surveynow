@@ -8,8 +8,10 @@ import { ReactComponent as PersonIcon } from './../../assets/icons/person.svg';
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { NavLink, withRouter } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const DropdownMenu = () => {
+  const user = useSelector((state) => state.user.profile);
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
@@ -52,7 +54,9 @@ const DropdownMenu = () => {
         unmountOnExit
         onEnter={calcHeight}>
         <div className="menu">
-          <DropdownItem to="/login" leftIcon={<PersonIcon />} >Login</DropdownItem>
+          <DropdownItem to="/login" leftIcon={<PersonIcon />} >
+            {(user.fullName === '') ? 'Login' : user.fullName}
+          </DropdownItem>
           <DropdownItem
             leftIcon={<CogIcon />}
             rightIcon={<ChevronIcon />}

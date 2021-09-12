@@ -8,12 +8,17 @@ import { ReactComponent as CaretIcon } from './assets/icons/caret.svg';
 import { ReactComponent as PlusIcon } from './assets/icons/plus.svg';
 import { Route, Switch } from 'react-router-dom';
 import Login from './containers/Login/Login';
+import { Provider } from 'react-redux';
+import configureStore from './redux/store';
 
 class App extends Component {
 
   render() {
+    const store = configureStore();
     return (
       <div>
+          <Provider store={store}>
+
         <NavBar>
           <NavItem icon={<PlusIcon />} />
           <NavItem icon={<BellIcon />} />
@@ -33,6 +38,8 @@ class App extends Component {
             }}
           />
         </Switch>
+        </Provider>
+
       </div>
     );
   }
