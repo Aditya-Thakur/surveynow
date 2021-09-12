@@ -1,10 +1,13 @@
 import { Avatar, Box, Button, Checkbox, Container, CssBaseline, FormControlLabel, Grid, Link, makeStyles, TextField, Typography } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react'
+import { login } from '../../services/user.service';
 import SocialLogin from './SocialLogin';
+import { useForm } from '../../states/useForm';
 
 export default function Login() {
   const classes = useStyles();
+  const [values, handleChage] = useForm( {email: '', password: ''});
     return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -26,6 +29,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              value = {values.email}
+              onChange = {handleChage}
             />
             <TextField
               variant="outlined"
@@ -37,6 +42,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value = {values.password}
+              onChange= {handleChage}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -48,6 +55,11 @@ export default function Login() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={() => {
+                  login(values).then( res => {
+                      console.log(res);
+                  })
+              }}
             >
               Sign In
             </Button>
@@ -82,7 +94,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit" href="https://localhost:3000/">
           Surveyor
         </Link>{' '}
         {new Date().getFullYear()}
@@ -103,7 +115,7 @@ function Copyright() {
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+    //   width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(1),
     },
     submit: {
