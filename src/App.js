@@ -10,6 +10,7 @@ import { Route, Switch } from 'react-router-dom';
 import Login from './containers/Login/Login';
 import { Provider } from 'react-redux';
 import configureStore from './redux/store';
+import Home from './containers/Home/Home';
 
 class App extends Component {
 
@@ -35,6 +36,13 @@ class App extends Component {
             path="/login"
             render={() => {
               return <Login />;
+            }}
+          />
+           <Route
+            exact
+            path="/"
+            render={() => {
+              return <Home />;
             }}
           />
         </Switch>

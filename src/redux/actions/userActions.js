@@ -10,5 +10,7 @@ export const userActions = {
   
     formSubmittionStatus: (status) => ({ type: Types.FORM_SUBMITION_STATUS, payload: { status }}),
   
-    login: (user) => ({ type: Types.LOGIN, payload: { user } })
+    login: (user) => ({ type: Types.LOGIN, payload: { user } }),
+
+    logout: (user) => ({ type: Types.LOGOUT, payload: { user } })
   }
